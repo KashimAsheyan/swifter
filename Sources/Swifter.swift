@@ -9,7 +9,7 @@ import Foundation
 
 public class Swifter {
     
-    public static let version = "2.0.0a"
+    public static let version = "2.0.3"
     
     private let router: Router<(([String: String], Request, @escaping ((Response) -> Void)) -> Void)>
     private let server: Server

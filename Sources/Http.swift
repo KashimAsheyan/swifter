@@ -7,6 +7,9 @@
 
 import Foundation
 
+public typealias HttpRequest = Request
+public typealias HttpResponse = Response
+
 open class Request {
     
     public enum HttpVersion { case http10, http11 }
