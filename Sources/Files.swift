@@ -20,35 +20,11 @@ public func shareFile(_ path: String) {
     }
 }*/
 
-#if os(iOS) || os(Linux)
-    
-func fileZeroCopy(from: Int32, to: Int32) {
-    var buffer = [UInt8](repeating: 0, count: 1024)
-    while true {
-        let readResult = read(source, &buffer, buffer.count)
-        guard readResult > 0 else {
-            return Int32(readResult)
-        }
-        var writeCounter = 0
-        while writeCounter < readResult {
-            let writeResult = write(target, &buffer + writeCounter, readResult - writeCounter)
-            guard writeResult > 0 else {
-                return Int32(writeResult)
-            }
-            writeCounter = writeCounter + writeResult
-        }
-    }
-}
-
-#else
-
 func fileZeroCopy(from: Int32, to: Int32) {
     var offset: off_t = 0
     var sf: sf_hdtr = sf_hdtr()
     sendfile(from, to, 0, &offset, &sf, 0)
 }
-
-#endif
 
 @available(OSXApplicationExtension 10.10, *)
 public func share(filesAtPath path: String, defaults: [String] = ["index.html", "default.html"]) -> (([String: String], Request, @escaping ((Response) -> Void)) -> Void) {

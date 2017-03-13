@@ -5,7 +5,7 @@
 //  Copyright © 2016 kolakowski. All rights reserved.
 //
 
-#if os(OSX) || os(iOS)
+#if os(OSX) || os(iOS) || os(tvOS)
     
 import Foundation
 
